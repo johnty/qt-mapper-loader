@@ -14,9 +14,17 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    mapperjsonconfig.cpp
+    mapperjsonconfig.cpp \
+    linkview.cpp \
+    signallist.cpp \
+    listtab.cpp
 
 HEADERS  += mainwindow.h \
-    mapperjsonconfig.h
+    mapperjsonconfig.h \
+    linkview.h \
+    signallist.h \
+    listtab.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    linkview.ui \
+    signallist.ui

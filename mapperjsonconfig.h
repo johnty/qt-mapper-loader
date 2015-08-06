@@ -15,6 +15,8 @@ public:
     MapperJsonConfig(const QString filePath, QIODevice::OpenModeFlag mode = QIODevice::ReadWrite);
 private:
     bool ParseFile(const QJsonObject& json_doc);
+    QList<QString> mySources;
+    QList<QString> myDestinations;
 };
 
 #endif // MAPPERJSONCONFIG_H

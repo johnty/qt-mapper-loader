@@ -22,9 +22,7 @@ MapperJsonConfig::MapperJsonConfig(const QString filePath, QIODevice::OpenModeFl
 
     QJsonDocument jsonDoc(QJsonDocument::fromJson(loadData));
 
-    qDebug() << " is object = " << jsonDoc.isObject() << "   is array = " << jsonDoc.isArray();
-
-    if (jsonDoc.isObject())
+    if (jsonDoc.isObject()) //the top level is a "mapping" object
     {
         ParseFile(jsonDoc.object());
     }
@@ -35,7 +33,6 @@ bool MapperJsonConfig::ParseFile(const QJsonObject& json_obj)
 {
     for (QJsonObject::const_iterator it = json_obj.begin(); it != json_obj.end(); it++)
     {
-        //we only technically have one object ("mapping"), so this top level
         //iterator is not really necessary...
         QString name = it.key();
 
@@ -54,6 +51,8 @@ bool MapperJsonConfig::ParseFile(const QJsonObject& json_obj)
                     QString device = curr_src["device"].toString();
                     QString signal = curr_src["signal"].toString();
                     qDebug()<<"     id: "<<id<<" device: "<<device<<" sig: "<<signal;
+                    mySources.append(id);
+
                 }
                 qDebug() << "***DESTINATIONS***";
                 QJsonArray dst_arr = val.toObject()["destinations"].toArray();
@@ -64,6 +63,7 @@ bool MapperJsonConfig::ParseFile(const QJsonObject& json_obj)
                     QString device = curr_dst["device"].toString();
                     QString signal = curr_dst["signal"].toString();
                     qDebug()<<"     id: "<<id<<" device: "<<device<<" sig: "<<signal;
+                    myDestinations.append(id);
                 }
                 qDebug() << "***CONNECTIONS***";
                 QJsonArray con_arr = val.toObject()["connections"].toArray();
